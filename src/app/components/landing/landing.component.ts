@@ -44,7 +44,7 @@ export class LandingComponent {
         human: null,
       },
       employer: {
-        name: '',
+        name: 'Apple Inc.',
       },
     };
 

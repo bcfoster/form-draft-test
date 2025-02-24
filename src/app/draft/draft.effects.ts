@@ -20,8 +20,8 @@ export class DraftEffects {
   restore$;
   v1ToV2;
   v2ToV3;
-  v3Tov4;
-  v4Tov5;
+  v3ToV4;
+  v4ToV5;
   v5ToV6;
 
   constructor(
@@ -90,17 +90,17 @@ export class DraftEffects {
       ),
     );
 
-    // existing mandatory field removed (age)
-    this.v3Tov4 = createEffect(() =>
+    // new optional field added (middle name)
+    this.v3ToV4 = createEffect(() =>
       actions$.pipe(
         ofType(DraftActions.updateDraft),
-        filter((action) => action.version == 4),
+        filter((action) => action.version == 3),
         map((action) => {
           const existing: v3.Form = JSON.parse(action.json);
 
           const updated: v4.Form = {
             firstName: existing.firstName,
-            middleName: existing.middleName,
+            middleName: v4.initialFormState.middleName,
             lastName: existing.lastName,
           };
 
@@ -113,10 +113,10 @@ export class DraftEffects {
     );
 
     // existing optional field removed (middle name)
-    this.v4Tov5 = createEffect(() =>
+    this.v4ToV5 = createEffect(() =>
       actions$.pipe(
         ofType(DraftActions.updateDraft),
-        filter((action) => action.version == 5),
+        filter((action) => action.version == 4),
         map((action) => {
           const existing: v4.Form = JSON.parse(action.json);
 
@@ -133,6 +133,7 @@ export class DraftEffects {
       ),
     );
 
+    // field got restructured (name moved to nested property)
     this.v5ToV6 = createEffect(() =>
       actions$.pipe(
         ofType(DraftActions.updateDraft),
