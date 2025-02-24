@@ -1,0 +1,9 @@
+<form *ngrxLet="form$ as form" [ngrxFormState]="form">
+  <div class="mb-3">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-control" id="name" type="text" [ngrxFormControlState]="form.controls.name" />
+  </div>
+
+  <button class="btn btn-primary" [routerLink]="['..']" type="button">Save</button>
+  <button class="btn btn-outline-danger ms-2" (click)="reset()" type="button">Reset</button>
+</form>

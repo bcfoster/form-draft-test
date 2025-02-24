@@ -1,0 +1,53 @@
+@let contactPercentCompleted = contactPercentCompleted$ | ngrxPush;
+@let employerPercentCompleted = employerPercentCompleted$ | ngrxPush;
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <b
+          ><a [routerLink]="['/contact']" class="link-underline link-underline-opacity-0"
+            >Contact information</a
+          ></b
+        >
+      </div>
+      <div class="card-body">
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Basic example"
+          [attr.aria-valuenow]="contactPercentCompleted"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div class="progress-bar" [style.width.%]="contactPercentCompleted"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <b
+          ><a [routerLink]="['/employer']" class="link-underline link-underline-opacity-0"
+            >Employer information</a
+          ></b
+        >
+      </div>
+      <div class="card-body">
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Basic example"
+          [attr.aria-valuenow]="employerPercentCompleted"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div class="progress-bar" [style.width.%]="employerPercentCompleted"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="restore()">Restore latest</button>
+<button type="button" class="btn btn-outline-primary" (click)="update()">Restore v1</button>
